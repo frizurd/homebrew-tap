@@ -7,20 +7,24 @@ permissions:
 jobs:
   audit:
     runs-on: macos-15
+    strategy:
+      matrix:
+        cask: [menu-veil, aqi-bar]
     env:
       HOMEBREW_NO_ANALYTICS: "1"
       HOMEBREW_NO_AUTO_UPDATE: "1"
     steps:
       - uses: actions/checkout@v4
-      - name: Load tap
+      - name: Load checked-out casks
         run: |
           brew tap frizurd/tap
+          cp Casks/*.rb "$(brew --repository frizurd/tap)/Casks/"
           if brew help trust >/dev/null 2>&1; then
-            brew trust --cask frizurd/tap/menu-veil
+            brew trust --cask "frizurd/tap/${{ matrix.cask }}"
           fi
       - name: Check style
-        run: brew style --cask frizurd/tap/menu-veil
+        run: brew style --cask "frizurd/tap/${{ matrix.cask }}"
       - name: Audit cask
-        run: brew audit --cask --strict frizurd/tap/menu-veil
+        run: brew audit --cask --strict "frizurd/tap/${{ matrix.cask }}"
       - name: Verify release checksum
-        run: brew fetch --cask frizurd/tap/menu-veil
+        run: brew fetch --cask "frizurd/tap/${{ matrix.cask }}"

@@ -1,6 +1,6 @@
 cask "menu-veil" do
-  version "0.2.0"
-  sha256 "32ae0964ae9d47529be8b41cfead5a295114e8e19791b2f1f7f6e493f27e6dce"
+  version "0.2.1"
+  sha256 "522d7f82508e22748e9ba32fe9e43f61084ffe022072459fa7ef257a4806e313"
 
   url "https://github.com/frizurd/menu-veil/releases/download/v#{version}/Menu-Veil-#{version}.zip"
   name "Menu Veil"

@@ -1,6 +1,6 @@
 cask "aqi-bar" do
   version "1.0.1"
-  sha256 "87a5a520ef80b4f9901925f7f69e8b9ffc5243e49dc83e3542021579b9f29fff"
+  sha256 "2eeb52125d3fea80e0353e0bc82bc677dd4c5791455e6bcdc0e431c2a11fbe20"
 
   url "https://github.com/frizurd/aqi-bar/releases/download/v#{version}/AQI-Bar-#{version}-macOS-arm64.zip"
   name "AQI Bar"

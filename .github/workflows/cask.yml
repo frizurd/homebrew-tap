@@ -1,0 +1,26 @@
+name: Check casks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: macos-15
+    env:
+      HOMEBREW_NO_ANALYTICS: "1"
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load tap
+        run: |
+          brew tap frizurd/tap
+          if brew help trust >/dev/null 2>&1; then
+            brew trust --cask frizurd/tap/menu-veil
+          fi
+      - name: Check style
+        run: brew style --cask frizurd/tap/menu-veil
+      - name: Audit cask
+        run: brew audit --cask --strict frizurd/tap/menu-veil
+      - name: Verify release checksum
+        run: brew fetch --cask frizurd/tap/menu-veil
